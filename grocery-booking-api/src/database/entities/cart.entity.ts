@@ -1,4 +1,8 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+/**
+ * tbl_cart Entity
+ */
 
 @Entity('tbl_cart')
 export class Cart {
@@ -6,7 +10,7 @@ export class Cart {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @PrimaryColumn()
+    @Column({ nullable: false})
     userEmail: string;
 
     @Column()

@@ -10,12 +10,22 @@ export class CartService {
         @InjectRepository(Cart) private cartRepository: Repository<Cart>
     ) {}
 
-
-    findAll(): Promise<Cart[]> {
-        return this.cartRepository.find();
+    
+    /**
+     * Function to fetch items based on email id.
+     * @param id 
+     * @returns 
+     */
+    findByEmailId(id: string): Promise<Cart[]> {
+        return this.cartRepository.findBy({ userEmail: id });
     }
 
-    insert(data: OrderItemDTO[]) {
-        return this.cartRepository.insert(data)
+    /**
+     * Function to add items to cart.
+     * @param data 
+     * @returns 
+     */
+    insert(data: Partial<OrderItemDTO>[]): Promise<number> {
+        return this.cartRepository.insert(data).then(({ raw }) => raw[0].id);
     }
 }

@@ -22,7 +22,7 @@ PostgreSQL Database
 
 CREATE TABLE tbl_grocery_items (
   id SERIAL,
-  name VARCHAR(255) PRIMARY KEY,
+  name VARCHAR(255) UNIQUE,
   category VARCHAR(255),
   price REAL,
   availability INT
@@ -30,7 +30,7 @@ CREATE TABLE tbl_grocery_items (
 
 CREATE TABLE tbl_cart (
   id SERIAL,
-  user_email VARCHAR(255) PRIMARY KEY,
+  user_email VARCHAR(255),
   item_name VARCHAR(255),
   quantity INT
 );

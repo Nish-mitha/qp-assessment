@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+/**
+ * tbl_grocery_items Entity
+ */
 
 @Entity('tbl_grocery_items')
 export class GroceryItems {
@@ -7,7 +10,7 @@ export class GroceryItems {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @PrimaryColumn()
+    @Column({ nullable: false, unique: true})
     name: string;
 
     @Column()

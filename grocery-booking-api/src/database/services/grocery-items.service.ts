@@ -10,19 +10,38 @@ export class GroceryItemsService {
         @InjectRepository(GroceryItems) private groceryItemsRepository: Repository<GroceryItems>
     ) {}
 
-    insert(data) {
-        return this.groceryItemsRepository.insert(data);
+    /**
+     * Function to insert items.
+     * @param data 
+     * @returns 
+     */
+    insert(data: Partial<GroceryItems>): Promise<number> {
+        return this.groceryItemsRepository.insert(data).then(({ raw }) => raw[0].id);
     }
 
-    findAll() {
+    /**
+     * Function to find all items.
+     * @returns 
+     */
+    findAll(): Promise<GroceryItems[]> {
         return this.groceryItemsRepository.find();
     }
 
-    delete(itemName: string) {
-        return this.groceryItemsRepository.delete(itemName);
+    /**
+     * Function to delete item.
+     * @param itemName 
+     * @returns 
+     */
+    delete(itemName: string): Promise<number> {
+        return this.groceryItemsRepository.delete({ name: itemName }).then(({ affected }) => affected);
     }
 
-    // update(data) {
-    //     return this.groceryItemsRepository.update()
-    // }
+    /**
+     * Function to update item.
+     * @param data 
+     * @returns 
+     */
+    update(data: Partial<GroceryItems>): Promise<number> {
+        return this.groceryItemsRepository.update({ name: data.name }, data).then(({ affected }) => affected);
+    }
 }
