@@ -3,21 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { APP_PIPE } from '@nestjs/core';
-import { Cart } from './database/entities/cart.entity';
-import { GroceryItems } from './database/entities/grocery-items.entity';
+import { getDatabaseConfig } from './database/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: '192.168.16.2',
-      port: 5432,
-      username: 'admin',
-      password: 'admin',
-      database: 'grocery_booking',
-      entities: [Cart, GroceryItems],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(getDatabaseConfig()),
     UserModule,
     AdminModule
   ],
