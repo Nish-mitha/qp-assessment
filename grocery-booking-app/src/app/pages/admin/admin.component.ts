@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { UpdateDialogComponent } from '../../common/update-dialog/update-dialog.component';
 import { AddDialogComponent } from '../../common/add-dialog/add-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 export interface GroceryItem {
   id: number;

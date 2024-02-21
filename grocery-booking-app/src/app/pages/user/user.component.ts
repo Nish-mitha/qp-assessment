@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderBoxComponent } from '../../common/order-box/order-box.component';
 import { MatButtonModule } from '@angular/material/button';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 
 export interface GroceryItem {
