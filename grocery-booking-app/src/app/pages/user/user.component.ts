@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderBoxComponent } from '../../common/order-box/order-box.component';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../environments/environment.development';
 
 
 export interface GroceryItem {
@@ -46,7 +47,7 @@ export class UserComponent {
   orderItems: OrderItem[] = [];
 
 
-  apiUrl: string = 'http://localhost:3000/user';
+  apiUrl: string = environment.userApiUrl;
 
   constructor(private httpClient: HttpClient, public dialog: MatDialog) {
     this.infiniteNumbers = Array.from({ length: 10 }, (_, i) => i + 1);

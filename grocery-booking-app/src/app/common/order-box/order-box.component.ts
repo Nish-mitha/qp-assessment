@@ -6,7 +6,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
@@ -20,7 +20,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class OrderBoxComponent {
   email: string = '';
   selectedItems: any[] = [];
-  apiUrl: string = 'http://localhost:3000/user';
+  apiUrl: string = environment.userApiUrl;
 
   constructor(public dialogRef: MatDialogRef<OrderBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

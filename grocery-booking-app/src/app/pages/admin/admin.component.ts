@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { UpdateDialogComponent } from '../../common/update-dialog/update-dialog.component';
 import { AddDialogComponent } from '../../common/add-dialog/add-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../environments/environment.development';
 
 export interface GroceryItem {
   id: number;
@@ -25,7 +26,7 @@ export interface GroceryItem {
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  apiUrl: string = 'http://localhost:3000/admin';
+  apiUrl: string = environment.adminApiUrl;
 
   displayedColumns: string[] = ['id', 'name', 'category', 'price', 'actions'];
   groceryItems: GroceryItem[] = [];
