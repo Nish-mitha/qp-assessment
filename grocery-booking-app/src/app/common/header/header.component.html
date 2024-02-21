@@ -1,0 +1,14 @@
+<mat-toolbar [color]="color">
+    <span>Grocery Booking App</span>
+    <span class="h2-spacer"></span>
+    <h2>Dashboard {{ role }}</h2>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="navigateToTarget('/user')">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <span class="btn-spacer"></span>
+    <button mat-icon-button (click)="navigateToTarget('/admin')">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <span class="btn-spacer"></span>
+</mat-toolbar>

@@ -70,15 +70,13 @@ export const GetItemsSchema = {
                       "id": 39,
                       "name": "Apple",
                       "category": "fruits",
-                      "price": 200,
-                      "availability": 100
+                      "price": 200
                     },
                     {
                       "id": 41,
                       "name": "Applesss",
                       "category": "fruits",
-                      "price": 200,
-                      "availability": 100
+                      "price": 200
                     }
                   ]
                 },

@@ -18,7 +18,4 @@ export class GroceryItems {
 
     @Column()
     price: number;
-
-    @Column()
-    availability: number;
 }

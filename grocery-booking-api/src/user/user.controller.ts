@@ -37,14 +37,12 @@ export class UserController {
     }
 
     /**
-     * Routee to fetch item based on email Id.
-     * @param param 
+     * Route to fetch ordered item.
      * @returns 
      */
-    @ApiParam(FetchOrderSchema.parameters[0])
     @ApiResponse(FetchOrderSchema.responses[200])
-    @Get('fetchOrder/:emailId')
-    async fetchOrder(@Param() param: EmailIdDTO): Promise<ResponseDTO> {
-        return await this.userService.fetchOrder(param['emailId']);
+    @Get('fetchOrder')
+    async fetchOrder(): Promise<ResponseDTO> {
+        return await this.userService.fetchOrder();
     }
 }

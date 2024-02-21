@@ -12,12 +12,11 @@ export class CartService {
 
     
     /**
-     * Function to fetch items based on email id.
-     * @param id 
+     * Function to fetch orders.
      * @returns 
      */
-    findByEmailId(id: string): Promise<Cart[]> {
-        return this.cartRepository.findBy({ userEmail: id });
+    find(): Promise<Cart[]> {
+        return this.cartRepository.find();
     }
 
     /**

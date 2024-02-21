@@ -1,0 +1,16 @@
+<div class="box">
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+    </mat-form-field>
+    <br>
+    <span>Item Name - Quantity</span>
+    <ul>
+      <li *ngFor="let item of selectedItems">{{ item.itemName }} - {{ item.quantity }}</li>
+    </ul>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onProceed()">Proceed</button>
+    <button mat-button (click)="onClose()">Cancel</button>
+  </mat-dialog-actions>
+</div>

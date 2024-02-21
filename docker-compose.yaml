@@ -2,6 +2,24 @@ version: "3.8"
 
 services:
 
+    # Grocery booking APP Service
+    grocery-booking-app-service:
+        container_name: grocery_booking_app
+        image: grocery-booking-app-latest
+        build: 
+          context: .
+          dockerfile: grocery-booking-app/docker/Dockerfile
+          target: development
+        volumes:
+        - ./grocery-booking-app/src:/home/user/src
+        - ./grocery-booking-app/node_modules:/home/user/node_modules
+        ports:
+          - "4200:80"
+        networks:
+          custom_network:
+            ipv4_address: 172.28.1.1
+        command: npm run start
+
     # Grocery booking API Service
     grocery-booking-api-service:
         container_name: grocery_booking_api
@@ -18,7 +36,7 @@ services:
         - ./grocery-booking-api/node_modules:/home/user/node_modules
         networks:
           custom_network:
-            ipv4_address: 172.28.1.3
+            ipv4_address: 172.28.1.2
         command: npm run start:dev
 
     # Database to handle grocery_booking API data
@@ -35,7 +53,7 @@ services:
         - postgres_data:/var/lib/postgresql/data
       networks:
         custom_network:
-          ipv4_address: 172.28.1.2
+          ipv4_address: 172.28.1.3
 
 networks:
   custom_network:

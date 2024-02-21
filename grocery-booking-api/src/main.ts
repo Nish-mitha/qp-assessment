@@ -20,18 +20,20 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('Grocery Booking API')
-    .setDescription('<h4>The Grocery Booking API facilitates the seamless booking and management of grocery orders for customers.\
+    .setDescription('<h5>The Grocery Booking API facilitates the seamless booking and management of grocery orders for customers.\
     With this API, users can browse available grocery items, add them to their cart.\
-    Admins can add, update, fetch and delete grocery items.</h4>')
+    Admins can add, update, fetch and delete grocery items.</h5>')
     .setVersion('1.0')
     .addServer(defaultEnv, 'Default environment')
     .addServer(localEnv, 'Local environment')
     .addServer(prodEnv, 'Production environment')
     .build();
   
-    const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('docs', app, document);
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('docs', app, document);
 
+  app.enableCors();
+  
   await app.listen(3000);
 
 }

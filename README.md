@@ -24,8 +24,7 @@ CREATE TABLE tbl_grocery_items (
   id SERIAL,
   name VARCHAR(255) UNIQUE,
   category VARCHAR(255),
-  price REAL,
-  availability INT
+  price REAL
 );
 
 CREATE TABLE tbl_cart (

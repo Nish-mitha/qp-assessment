@@ -47,21 +47,13 @@ export class UserService {
 
     /**
      * Function to fetch orders.
-     * @param id 
      * @returns 
      */
-    async fetchOrder(id: string): Promise<ResponseDTO> {
-        const data = await this.cartService.findByEmailId(id).catch(async error => {
+    async fetchOrder(): Promise<ResponseDTO> {
+        const data = await this.cartService.find().catch(async error => {
             this.logger.error(`Something went Wrong! ${error}`);
             throw new InternalServerErrorException('Something went Wrong!');
-        })
-
-        if(data.length == 0) {
-            return {
-                status: HttpStatus.OK,
-                message: `No orders found for the user with the email ID: ${id}`
-            }
-        }
+        });
 
         return {
             status: HttpStatus.OK,

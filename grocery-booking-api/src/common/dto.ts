@@ -19,10 +19,6 @@ export class GroceryItemsDTO {
     @IsNumber()
     price: number;
 
-    @ApiProperty()
-    @IsNumber()
-    availability: number;
-
 }
 
 export class OrderItemDTO {

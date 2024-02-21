@@ -23,15 +23,13 @@ export const FetchItemsSchema = {
                       "id": 39,
                       "name": "Apple",
                       "category": "fruits",
-                      "price": 200,
-                      "availability": 100
+                      "price": 200
                     },
                     {
                       "id": 41,
                       "name": "Orange",
                       "category": "fruits",
-                      "price": 200,
-                      "availability": 100
+                      "price": 200
                     }
                   ],
               },
@@ -70,17 +68,6 @@ export const OrderItemsSchema = {
 }
 
 export const FetchOrderSchema = {
-    parameters: [
-        {
-          name: 'emailId',
-          in: 'path',
-          required: true,
-          description: 'User Email ID',
-          schema: {
-            type: 'string',
-          },
-        }
-    ],
     responses: {
       [HttpStatus.OK]: {
         status: 200,
