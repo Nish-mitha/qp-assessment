@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    userApiUrl: 'http://localhost:3000/api',
-    adminApiUrl: 'http://localhost:3000/admin'
+    userApiUrl: 'https://grocery-booking-api.onrender.com/api',
+    adminApiUrl: 'https://grocery-booking-api.onrender.com/admin'
 };
