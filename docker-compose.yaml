@@ -12,7 +12,6 @@ services:
           target: development
         volumes:
         - ./grocery-booking-app/src:/home/user/src
-        - ./grocery-booking-app/node_modules:/home/user/node_modules
         ports:
           - "4200:80"
         networks:
@@ -33,7 +32,6 @@ services:
             - ./grocery-booking-api/.env/common.env
         volumes:
         - ./grocery-booking-api/src:/home/user/src
-        - ./grocery-booking-api/node_modules:/home/user/node_modules
         networks:
           custom_network:
             ipv4_address: 172.28.1.2
