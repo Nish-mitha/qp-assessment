@@ -18,4 +18,7 @@ export class GroceryItems {
 
     @Column()
     price: number;
+
+    @Column()
+    quantity_available: number;
 }

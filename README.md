@@ -15,6 +15,7 @@ This project consists of a backend service, "grocery-booking-api", built using N
   - `/admin/getItem`: View existing grocery items.
   - `/admin/deleteItem/:itemName`: Remove grocery items from the system.
   - `/admin/updateItem`: Update details (e.g., name, price) of existing grocery items.
+  - Manage the inventory by checking the availablity of items.
 - User:
   - `/user/fetchItems`: View the list of available grocery items.
   - `/user/orderItems`: Ability to book multiple grocery items in a single order.
@@ -72,7 +73,8 @@ CREATE TABLE tbl_grocery_items (
   id SERIAL,
   name VARCHAR(255) UNIQUE,
   category VARCHAR(255),
-  price REAL
+  price REAL,
+  quantity_available INT
 );
 ```
 

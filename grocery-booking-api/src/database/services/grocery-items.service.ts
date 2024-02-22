@@ -44,4 +44,13 @@ export class GroceryItemsService {
     update(data: Partial<GroceryItems>): Promise<number> {
         return this.groceryItemsRepository.update({ name: data.name }, data).then(({ affected }) => affected);
     }
+
+    /**
+     * Get Quantity by item
+     * @param itemName 
+     * @returns 
+     */
+    async getQuantityByItem(itemName: string): Promise<GroceryItems[]> {
+        return await this.groceryItemsRepository.findBy({name: itemName});
+    }
 }

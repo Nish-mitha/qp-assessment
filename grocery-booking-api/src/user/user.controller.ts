@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseArrayPipe, Post } from '@nestjs/common';
 import { EmailIdDTO, OrderItemDTO, ResponseDTO } from 'src/common/dto';
 import { UserService } from './user.service';
 import { ApiBody, ApiExtraModels, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -29,10 +29,10 @@ export class UserController {
      * @param payload 
      * @returns 
      */
-    @ApiBody({ type: OrderItemDTO })
+    @ApiBody({ type: [OrderItemDTO] })
     @ApiResponse(OrderItemsSchema.responses[200])
     @Post('orderItems')
-    async orderItems(@Body() payload: OrderItemDTO[]): Promise<ResponseDTO> {
+    async orderItems(@Body(new ParseArrayPipe({ items: OrderItemDTO })) payload: OrderItemDTO[]): Promise<ResponseDTO> {
         return await this.userService.orderItems(payload);
     }
 

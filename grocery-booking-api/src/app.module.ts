@@ -15,7 +15,7 @@ import { getDatabaseConfig } from './database/config';
   providers: [
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe
+      useValue: new ValidationPipe({ transform: true })
     }
   ],
 })
