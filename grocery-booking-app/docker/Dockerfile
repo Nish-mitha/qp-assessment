@@ -16,11 +16,10 @@ COPY grocery-booking-app/src/ ./src/
 
 FROM nginx:alpine as prod
 
-RUN npm run build
-
 
 RUN rm -rf /usr/share/nginx/html/*
 
+RUN npm run build
 
 COPY --from=development /home/user/dist/grocery-booking-app/browser /usr/share/nginx/html
 
