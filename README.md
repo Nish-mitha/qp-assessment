@@ -85,6 +85,8 @@ CREATE TABLE tbl_cart (
   id SERIAL,
   user_email VARCHAR(255),
   item_name VARCHAR(255),
-  quantity INT
+  price REAL,
+  quantity INT,
+  total_price REAL
 );
 ```

@@ -87,12 +87,16 @@ export const FetchOrderSchema = {
                       {
                         "id": 1,
                         "name": "Apple",
-                        "quantity": 20
+                        "quantity": 20,
+                        "price": 2,
+                        "totalPrice": 40
                       },
                       {
                         "id": 2,
                         "name": "Orange",
-                        "quantity": 10
+                        "quantity": 10,
+                        "price": 2,
+                        "totalPrice": 20
                       }
                     ],
                 },

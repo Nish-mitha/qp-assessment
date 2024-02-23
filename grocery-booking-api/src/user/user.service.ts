@@ -61,7 +61,10 @@ export class UserService {
             /**
              * Insert Data to cart
              */
-            await this.cartService.insert(data).catch(async error => {
+            val['price'] = groceryItems[0].price;
+            val['totalPrice'] = val.quantity * groceryItems[0].price;
+
+            await this.cartService.insert(val).catch(async error => {
                 this.logger.error(`Something went Wrong! ${error}`);
                 throw new InternalServerErrorException('Something went Wrong!');
             });

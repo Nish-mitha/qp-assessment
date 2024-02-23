@@ -17,5 +17,11 @@ export class Cart {
     itemName: string;
 
     @Column()
+    price: number;
+
+    @Column()
     quantity: number;
+
+    @Column()
+    totalPrice: number;
 }

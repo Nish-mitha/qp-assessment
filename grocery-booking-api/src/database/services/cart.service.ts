@@ -24,7 +24,7 @@ export class CartService {
      * @param data 
      * @returns 
      */
-    insert(data: Partial<OrderItemDTO>[]): Promise<number> {
+    insert(data: Partial<Cart>): Promise<number> {
         return this.cartRepository.insert(data).then(({ raw }) => raw[0].id);
     }
 }
