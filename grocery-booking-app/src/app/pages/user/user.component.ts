@@ -57,6 +57,18 @@ export class UserComponent {
     /**
      * Fetch Items
      */
+    this.refreshItems();
+
+    /**
+     * Fetch Orders
+     */
+    this.refreshOrders();
+  }
+
+  /**
+   * Refresh Items
+   */
+  refreshItems(): void {
     this.fetchItems().subscribe(event => {
       if(event.status == 200) {
         this.groceryItems = event.response;
@@ -65,10 +77,12 @@ export class UserComponent {
         }
       }
     });
+  }
 
-    /**
-     * Fetch Orders
-     */
+  /**
+   * Refresh Orders
+   */
+  refreshOrders(): void {
     this.fetchOrders().subscribe(event => {
       if(event.status == 200) {
         this.orderItems = event.response;
@@ -113,7 +127,7 @@ export class UserComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(OrderBoxComponent, {
       width: '400px',
-      data: { selectedItems: this.selectedItems }
+      data: { selectedItems: this.selectedItems, refreshGroceryItems: this.refreshItems.bind(this), refreshUserOrders: this.refreshOrders.bind(this) }
     });
 
     dialogRef.afterClosed().subscribe(result => {

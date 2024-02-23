@@ -36,6 +36,13 @@ export class AdminComponent {
     /**
      * Fetch Items
      */
+    this.refreshData();
+  }
+  
+  /**
+   * Refresh Data
+   */
+  refreshData(): void {
     this.fetchItems().subscribe(event => {
       if(event.status == 200) {
         this.groceryItems = event.response;
@@ -48,7 +55,6 @@ export class AdminComponent {
       }
     });
   }
-
   /**
    * Fetch Items
    * @returns 
@@ -70,7 +76,7 @@ export class AdminComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        if(result.name == '' || result.category == '' || result.price == '' || item.quantity_available == '') {
+        if(result.name === '' || result.category === '' || result.price === '' || result.quantity_available === '') {
           this.snackBar.open("Cannot Update. Input Value is Empty!", 'Close', {
             duration: 2000,
             horizontalPosition: 'center',
@@ -82,7 +88,7 @@ export class AdminComponent {
         this.httpClient.put<any>(this.apiUrl+'/updateItem', result)
         .subscribe(response => {
           console.log('POST request successful:', response);
-          window.location.reload();
+          this.refreshData();
         }, error => {
           this.snackBar.open(error.error.message, 'Close', {
             duration: 2000,
@@ -111,7 +117,7 @@ export class AdminComponent {
         this.httpClient.post<any>(this.apiUrl+'/addItem', result)
         .subscribe(response => {
           console.log('POST request successful:', response);
-          window.location.reload();
+          this.refreshData();
         }, error => {
           this.snackBar.open(error.error.message, 'Close', {
             duration: 2000,
@@ -137,7 +143,7 @@ export class AdminComponent {
         horizontalPosition: 'center',
         verticalPosition: 'bottom'
       });
-      window.location.reload();
+      this.refreshData();
     });
   }
 }

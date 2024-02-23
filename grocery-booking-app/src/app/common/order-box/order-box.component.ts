@@ -53,7 +53,8 @@ export class OrderBoxComponent {
       this.http.post<any>(this.apiUrl+'/orderItems', this.selectedItems)
         .subscribe(response => {
           console.log('POST request successful:', response);
-          window.location.reload();
+          this.data.refreshGroceryItems();
+          this.data.refreshUserOrders();
         }, error => {
           console.error('POST request failed:', error);
         });
