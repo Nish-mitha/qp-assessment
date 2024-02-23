@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Post, Put } from '@nestjs/common';
 import { GroceryItemsDTO, ResponseDTO } from 'src/common/dto';
 import { AdminService } from './admin.service';
 import { ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -57,7 +57,7 @@ export class AdminController {
     @ApiResponse(UpdateItemSchema.responses[200])
     @ApiResponse(UpdateItemSchema.responses[404])
     @Put('updateItem')
-    async updateItem(@Body() payload: Partial<GroceryItemsDTO>): Promise<ResponseDTO> {
+    async updateItem(@Body(new ParseArrayPipe({ items: GroceryItemsDTO })) payload: Partial<GroceryItemsDTO>): Promise<ResponseDTO> {
         return await this.adminService.updateItem(payload);
     }
 
