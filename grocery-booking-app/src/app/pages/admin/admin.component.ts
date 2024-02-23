@@ -85,6 +85,15 @@ export class AdminComponent {
           return;
         }
 
+        if(result.price < 1 ||  result.quantity_available < 1) {
+          this.snackBar.open("Invalid Input!", 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
+          return;
+        }
+
         this.httpClient.put<any>(this.apiUrl+'/updateItem', result)
         .subscribe(response => {
           console.log('POST request successful:', response);
