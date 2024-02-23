@@ -16,6 +16,7 @@ export interface GroceryItem {
   name: string;
   category: string;
   price: number;
+  quantity_available: number;
 }
 
 @Component({
@@ -28,7 +29,7 @@ export interface GroceryItem {
 export class AdminComponent {
   apiUrl: string = environment.adminApiUrl;
 
-  displayedColumns: string[] = ['id', 'name', 'category', 'price', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'price', 'quantity_available', 'actions'];
   groceryItems: GroceryItem[] = [];
 
   constructor(private httpClient: HttpClient, private dialog: MatDialog, private snackBar: MatSnackBar) {
@@ -38,6 +39,12 @@ export class AdminComponent {
     this.fetchItems().subscribe(event => {
       if(event.status == 200) {
         this.groceryItems = event.response;
+      } else {
+        this.snackBar.open(event.error.message, 'Close', {
+          duration: 2000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
       }
     });
   }
@@ -58,16 +65,30 @@ export class AdminComponent {
   editItem(item: any) {
     const dialogRef = this.dialog.open(UpdateDialogComponent, {
       width: '250px',
-      data: { id: item.id, name: item.name, category: item.category, price: item.price }
+      data: { id: item.id, name: item.name, category: item.category, price: item.price, quantity_available: item.quantity_available }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        if(result.name == '' || result.category == '' || result.price == '' || item.quantity_available == '') {
+          this.snackBar.open("Cannot Update. Input Value is Empty!", 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
+          return;
+        }
+
         this.httpClient.put<any>(this.apiUrl+'/updateItem', result)
         .subscribe(response => {
           console.log('POST request successful:', response);
           window.location.reload();
         }, error => {
+          this.snackBar.open(error.error.message, 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
           console.error('POST request failed:', error);
         });
       }
@@ -80,24 +101,23 @@ export class AdminComponent {
   addItem(): void {
     const dialogRef = this.dialog.open(AddDialogComponent, {
       width: '250px',
-      data: { name: '', category: '', price: '' }
+      data: { name: '', category: '', price: '', quantity_available: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         result.price = Number(result.price);
+        result.quantity_available = Number(result.quantity_available);
         this.httpClient.post<any>(this.apiUrl+'/addItem', result)
         .subscribe(response => {
           console.log('POST request successful:', response);
           window.location.reload();
         }, error => {
-          if(error.error.statusCode == 409) {
-                this.snackBar.open(error.error.message, 'Close', {
-                  duration: 2000,
-                  horizontalPosition: 'center',
-                  verticalPosition: 'bottom'
-                });
-          }
+          this.snackBar.open(error.error.message, 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
           console.error('POST request failed:', error);
         });
       }

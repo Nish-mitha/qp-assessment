@@ -17,13 +17,17 @@ export interface GroceryItem {
   name: string;
   category: string;
   price: number;
+  quantity_available: number;
+  quantity_list: any[];
 }
 
 export interface OrderItem {
   id: number;
   userEmail: string;
   itemName: string;
+  price: number;
   quantity: number;
+  totalPrice: number;
 }
 
 @Component({
@@ -40,8 +44,8 @@ export class UserComponent {
   displayOrderBtn: boolean = false;
 
 
-  displayedGroceryColumns: string[] = ['id', 'name', 'category', 'price', 'quantity'];
-  displayedOrderColumns: string[] = ['id', 'email', 'name', 'quantity'];
+  displayedGroceryColumns: string[] = ['id', 'name', 'category', 'price', 'quantity_available'];
+  displayedOrderColumns: string[] = ['id', 'email', 'name', 'price', 'quantity', 'totalPrice'];
 
   groceryItems: GroceryItem[] = [];
   orderItems: OrderItem[] = [];
@@ -50,13 +54,15 @@ export class UserComponent {
   apiUrl: string = environment.userApiUrl;
 
   constructor(private httpClient: HttpClient, public dialog: MatDialog) {
-    this.infiniteNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
     /**
      * Fetch Items
      */
     this.fetchItems().subscribe(event => {
       if(event.status == 200) {
         this.groceryItems = event.response;
+        for(const val of this.groceryItems) {
+          val.quantity_list = Array.from({ length: val.quantity_available }, (_, i) => i + 1);
+        }
       }
     });
 
@@ -94,11 +100,10 @@ export class UserComponent {
   onQuantityChange(element: any) {
     const index = this.selectedItems.findIndex(item => item.itemName === element.name);
     if (index === -1) {
-      this.selectedItems.push({ itemName: element.name, quantity: element.quantity });
+      this.selectedItems.push({ itemName: element.name, quantity: element.quantity_available });
     } else {
-      this.selectedItems[index].quantity = element.quantity;
+      this.selectedItems[index].quantity = element.quantity_available;
     }
-    
     if(this.selectedItems.length != 0) this.displayOrderBtn = true;
   }
 

@@ -14,10 +14,9 @@ RUN npm install
 COPY grocery-booking-app/src/ ./src/
 
 
-RUN npm run build
-
-
 FROM nginx:alpine as prod
+
+RUN npm run build
 
 
 RUN rm -rf /usr/share/nginx/html/*

@@ -46,6 +46,7 @@ export class OrderBoxComponent {
 
       this.selectedItems.forEach(item => {
         item.userEmail = this.email;
+        item.quantity = Number(item.quantity);
       });
 
 
